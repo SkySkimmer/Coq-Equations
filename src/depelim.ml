@@ -418,8 +418,8 @@ let rec compare_upto_variables sigma t v =
          let args' = CArray.sub args' (Array.length args' - real) real in
          CArray.for_all2 (compare_upto_variables sigma) args args'
        else
-         compare_constr sigma (compare_upto_variables sigma) t v
-    | _, _ -> compare_constr sigma (compare_upto_variables sigma) t v
+         compare_constr sigma (fun _ -> compare_upto_variables sigma) 0 t v
+    | _, _ -> compare_constr sigma (fun _ -> compare_upto_variables sigma) 0 t v
 
 let specialize_eqs id gl =
   let env = pf_env gl in
