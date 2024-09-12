@@ -344,7 +344,10 @@ let add_wfrec_implicits rec_type c =
 
 let interp_constr_evars_impls env sigma data expected_type c =
   let c = add_wfrec_implicits data.rec_type c in
-  let imps = Implicit_quantifiers.implicits_of_glob_constr ~with_products:(expected_type == Pretyping.IsType) c in
+  let imps = Implicit_quantifiers.implicits_of_glob_constr
+      ~with_products:(expected_type = Pretyping.is_type)
+      c
+  in
   let flags = Pretyping.{ all_no_fail_flags with program_mode = data.program_mode } in
   let sigma, c = Pretyping.understand_tcc ~flags env sigma ~expected_type c in
   sigma, (c, imps)
