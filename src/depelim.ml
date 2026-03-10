@@ -75,7 +75,7 @@ let needs_generalization gl id =
       | None -> let f, args = decompose_app sigma t in
                   f, args, false, id, oldid
       | Some t ->
-          let f, args = decompose_app sigma t in
+          let f, args = decompose_app sigma (unfold_if_nat sigma t) in
             f, args, true, id, oldid
   in
     if Array.is_empty args then false

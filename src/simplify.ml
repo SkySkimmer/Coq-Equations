@@ -944,7 +944,7 @@ let pre_solution ~(dir:direction) = with_retry (pre_solution ~dir)
 let is_construct_sigma_2 env sigma f =
   let term = match decompose_sigma env sigma f with
     | Some (_, _, _, _, t) -> t
-    | None -> f
+    | None -> unfold_if_nat sigma f
   in
   let head, _ = EConstr.decompose_app sigma term in
   EConstr.isConstruct sigma head
@@ -1228,7 +1228,7 @@ let infer_step ?(loc:Loc.t option) ~(isSol:bool)
       in
       let check_construct t =
         let env = push_rel_context ctx env in
-        let t = Tacred.hnf_constr env !evd t in
+        let t = unfold_if_nat !evd @@ Tacred.hnf_constr env !evd t in
         let f, _ = EConstr.decompose_app !evd t in
         EConstr.isConstruct !evd f
       in

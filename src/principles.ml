@@ -1701,6 +1701,7 @@ let build_equations ~pm with_ind env evd ?(alias:alias option) rec_info progs =
                 mind_entry_params = []; (* (identifier * local_entry) list; *)
                 mind_entry_inds = inds;
                 mind_entry_variance = None;
+                mind_entry_is_nat = false;
               }
     in
     let () = Goptions.set_bool_option_value_gen ~locality:Goptions.OptLocal ["Elimination";"Schemes"] false in

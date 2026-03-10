@@ -99,7 +99,7 @@ let inaccs_of_constrs l = List.map (fun x -> PInac x) l
 
 let rec pats_of_constrs env sigma l = List.map (pat_of_constr env sigma) l
 and pat_of_constr env sigma c =
-  match kind sigma c with
+  match kind_nonat sigma c with
   | Rel i -> PRel i
   | App (f, [| a ; c |]) when is_global env sigma (Lazy.force coq_inacc) f ->
     PInac c

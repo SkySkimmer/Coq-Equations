@@ -411,6 +411,7 @@ let pattern_of_glob_constr env sigma avoid patname gc =
             (loc,
              str "Cannot interpret " ++ pr_glob_constr_env env sigma c ++ str " as a constructor")
       end
+    | GNat (ind, n) -> aux patname ?loc (DAst.get @@ Glob_ops.unfold_nat ?loc ind n)
   (* | GLetIn (Name id as na',b,None,e) when is_gvar id e && na = Anonymous ->
    *    (\* A canonical encoding of aliases *\)
    *    DAst.get (cases_pattern_of_glob_constr na' b) *)

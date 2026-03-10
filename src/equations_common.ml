@@ -865,7 +865,8 @@ let ids_of_constr sigma ?(all=false) vars c =
     match kind sigma c with
     | Var id -> Id.Set.add id vars
     | App (f, args) -> 
-	(match kind sigma f with
+      (match kind sigma f with
+        | Nat (ind,_)
 	| Construct ((ind,_),_)
 	| Ind (ind, _) ->
             let (mib,mip) = Global.lookup_inductive ind in
