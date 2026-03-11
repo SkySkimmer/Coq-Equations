@@ -1,7 +1,10 @@
 src/META.rocq-equations.in
--I src
+-I _build/install/default/lib
 -I test-suite
--Q _build/default/theories Equations
+-Q _build/default/theories/core Equations
+-Q _build/default/theories/Type Equations.Type
+-Q _build/default/theories/Prop Equations.Prop
+-Q _build/default/theories/HoTT Equations.HoTT
 -I theories
 -I examples
 -Q _build/default/examples Equations.Examples
